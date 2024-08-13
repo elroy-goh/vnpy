@@ -107,6 +107,7 @@ class BaseGateway(ABC):
         """
         self.on_event(EVENT_TRADE, trade)
         self.on_event(EVENT_TRADE + trade.vt_symbol, trade)
+        self.write_log(f"On Trade: {trade}")
 
     def on_order(self, order: OrderData) -> None:
         """
@@ -115,6 +116,7 @@ class BaseGateway(ABC):
         """
         self.on_event(EVENT_ORDER, order)
         self.on_event(EVENT_ORDER + order.vt_orderid, order)
+        self.write_log(f"On Order: {order}")
 
     def on_position(self, position: PositionData) -> None:
         """
