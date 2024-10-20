@@ -504,6 +504,7 @@ class ArrayManager(object):
         self.volume_array: np.ndarray = np.zeros(size)
         self.turnover_array: np.ndarray = np.zeros(size)
         self.open_interest_array: np.ndarray = np.zeros(size)
+        self.latest_bar: BarData = None
 
     def update_bar(self, bar: BarData) -> None:
         """
@@ -528,6 +529,7 @@ class ArrayManager(object):
         self.volume_array[-1] = bar.volume
         self.turnover_array[-1] = bar.turnover
         self.open_interest_array[-1] = bar.open_interest
+        self.latest_bar = bar
 
     @property
     def open(self) -> np.ndarray:
