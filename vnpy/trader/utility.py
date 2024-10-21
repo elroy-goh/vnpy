@@ -504,6 +504,7 @@ class ArrayManager(object):
         self.volume_array: np.ndarray = np.zeros(size)
         self.turnover_array: np.ndarray = np.zeros(size)
         self.open_interest_array: np.ndarray = np.zeros(size)
+        self.datetimes: list = [datetime(1900, 1, 1) for _ in range(size)]
         self.latest_bar: BarData = None
 
     def update_bar(self, bar: BarData) -> None:
@@ -521,6 +522,7 @@ class ArrayManager(object):
         self.volume_array[:-1] = self.volume_array[1:]
         self.turnover_array[:-1] = self.turnover_array[1:]
         self.open_interest_array[:-1] = self.open_interest_array[1:]
+        self.datetimes[:-1] = self.datetimes[1:]
 
         self.open_array[-1] = bar.open_price
         self.high_array[-1] = bar.high_price
@@ -529,6 +531,7 @@ class ArrayManager(object):
         self.volume_array[-1] = bar.volume
         self.turnover_array[-1] = bar.turnover
         self.open_interest_array[-1] = bar.open_interest
+        self.datetimes[-1] = bar.datetime
         self.latest_bar = bar
 
     @property
